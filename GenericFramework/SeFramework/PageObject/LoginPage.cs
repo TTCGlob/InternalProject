@@ -1,11 +1,7 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SeFramework.Core;
 
-namespace SeFramework.Selenium.PageObject.WebShopScreens
+namespace SeFramework.PageObject
 {
     public class LoginPage : BaseObject
     {

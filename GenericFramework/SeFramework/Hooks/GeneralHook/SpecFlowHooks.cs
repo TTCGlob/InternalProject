@@ -1,12 +1,9 @@
 ﻿using OpenQA.Selenium.Firefox;
+using SeFramework.Context.General;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace SeFramework.Common
+namespace SeFramework.Hooks.GeneralHook
 {
     [Binding]
     class SpecFlowHooks
@@ -39,7 +36,8 @@ namespace SeFramework.Common
         [AfterScenario]
         public void AfterScenario()
         {
-            try {
+            try
+            {
                 _ec.Driver.Close();
             }
             catch { }

@@ -1,17 +1,13 @@
 ﻿using NUnit.Framework;
-using SeFramework.Common;
-using SeFramework.Selenium.PageObject;
-using SeFramework.Selenium.PageObject.WebShopScreens;
+using SeFramework.Context.General;
+using SeFramework.Core;
+using SeFramework.PageObject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
-namespace SeFramework.Bindings
+namespace SeFramework.StepDefinition
 {
-    
+
     [Binding]
     class _2UnlimitedBindings
     {
@@ -36,7 +32,7 @@ namespace SeFramework.Bindings
             _currentScreen = TopLinks._(_ec.Driver);
             TopLinks.Controls control = TopLinks.Controls.LogIn;
 
-            switch(pageName)
+            switch (pageName)
             {
                 case "Log in":
                     control = TopLinks.Controls.LogIn;
@@ -86,7 +82,7 @@ namespace SeFramework.Bindings
         public static BaseObject GetScreen(Type screenType)
         {
             //BaseObject screen = screenType.InvokeMember("_", System.Reflection.BindingFlags.Static, EqualityComparer.)
-            return null; 
+            return null;
         }
     }
 }
