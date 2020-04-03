@@ -14,4 +14,3 @@ Scenario Outline: Exesise Email field on Login page
 	| variant      | email |
 	| just text    | abc   |
 	| just numbers | 123   |
-

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Firefox;
+﻿using BoDi;
+using OpenQA.Selenium.Firefox;
 using SeFramework.Context.General;
 using System;
 using TechTalk.SpecFlow;
@@ -8,10 +9,14 @@ namespace SeFramework.Hooks.GeneralHook
     [Binding]
     class SpecFlowHooks
     {
-        private readonly ExecutionContext _ec;
-        public SpecFlowHooks(ExecutionContext ec)
+        private readonly ExecutionContext executionContext;
+        public SpecFlowHooks(IObjectContainer container)
         {
-            _ec = ec;
+            executionContext = new ExecutionContext()
+            {
+                ConfigReader = InitialisationActions.GetConfigReader()
+            };
+            container.RegisterInstanceAs(executionContext);
         }
 
         [BeforeFeature]
@@ -27,20 +32,16 @@ namespace SeFramework.Hooks.GeneralHook
         [BeforeScenario]
         public void BeforeScenario()
         {
-            var driver = new FirefoxDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            _ec.Driver = driver;
+            executionContext.Driver = InitialisationActions.InitialiseDriver();
         }
 
         [AfterScenario]
         public void AfterScenario()
         {
-            try
-            {
-                _ec.Driver.Close();
-            }
-            catch { }
+            executionContext.Driver?.Close();
+            executionContext.Driver?.Quit();
+            executionContext.Driver?.Dispose();
+            executionContext.Driver = null;
         }
 
     }

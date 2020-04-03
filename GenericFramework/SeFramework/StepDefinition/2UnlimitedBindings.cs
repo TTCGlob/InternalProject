@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using SeFramework.Context.General;
 using SeFramework.Core;
 using SeFramework.PageObject;
@@ -11,25 +12,25 @@ namespace SeFramework.StepDefinition
     [Binding]
     class _2UnlimitedBindings
     {
-        private readonly ExecutionContext _ec;
+        private readonly ExecutionContext executionContext;
         private BaseObject _currentScreen;
 
-        public _2UnlimitedBindings(ExecutionContext ec)
+        public _2UnlimitedBindings(ExecutionContext context)
         {
-            _ec = ec;
+            executionContext = context;
         }
 
         [Given(@"Webpage (.*) is loaded")]
         [Given(@"Go to (.*)")]
         public void GivenGoURL(string url)
         {
-            _ec.Driver.Url = url;
+            executionContext.Driver.Url = url;
         }
 
         [Given(@"Switch to (.*) page")]
         public void GivenSwitchToPage(string pageName)
         {
-            _currentScreen = TopLinks._(_ec.Driver);
+            _currentScreen = TopLinks._(executionContext.Driver);
             TopLinks.Controls control = TopLinks.Controls.LogIn;
 
             switch (pageName)
@@ -57,7 +58,7 @@ namespace SeFramework.StepDefinition
         [When(@"I enter (.*) in Email field")]
         public void WhenIEnterInEmailField(string emailValue)
         {
-            _currentScreen = LoginPage._(_ec.Driver);
+            _currentScreen = LoginPage._(executionContext.Driver);
             var ctrl = _currentScreen.withControlE(LoginPage.ReturningCustomer.Email);
             ctrl.click();
             ctrl.enterText(emailValue);
@@ -73,7 +74,7 @@ namespace SeFramework.StepDefinition
         public void ThenICanSeeTheErrorMessage()
         {
             var errMessage = _currentScreen.withControlE(LoginPage.ReturningCustomer.WrongEmailMessage);
-            Assert.IsFalse(string.IsNullOrEmpty(errMessage.getText()), "Error message is empty");
+            errMessage.getText().Should().NotBeNullOrEmpty("There should be an error message");
         }
     }
 
