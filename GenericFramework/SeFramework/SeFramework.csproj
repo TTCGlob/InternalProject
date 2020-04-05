@@ -134,6 +134,7 @@
     <Compile Include="Constant\Framework\General.cs" />
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Exceptions\NoSuchBrowserDriverException.cs" />
+    <Compile Include="ExtensionResources\SeleniumExtensions.cs" />
     <Compile Include="Hooks\GeneralHook\InitialisationActions.cs" />
     <Compile Include="StepDefinition\2UnlimitedBindings.cs" />
     <Compile Include="Hooks\GeneralHook\SpecFlowHooks.cs" />
@@ -143,10 +144,12 @@
     <Compile Include="Core\Control.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\TopLinks.cs" />
+    <Compile Include="StepDefinition\TricentisWebShop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\2Unlimited.feature" />
+    <None Include="Features\TricentisWebShop.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

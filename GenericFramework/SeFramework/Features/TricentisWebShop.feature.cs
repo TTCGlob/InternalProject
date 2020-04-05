@@ -19,23 +19,23 @@ namespace SeFramework.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute(TestName="My 2Unlimited")]
-    [NUnit.Framework.DescriptionAttribute("My 2Unlimited")]
-    public partial class My2UnlimitedFeature
+    [NUnit.Framework.TestFixtureAttribute(TestName="TricentisWebShop")]
+    [NUnit.Framework.DescriptionAttribute("\tScenarios on the Tricentis web shop site")]
+    public partial class TricentisWebShopFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "2Unlimited.feature"
+#line 1 "TricentisWebShop.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "My 2Unlimited", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "TricentisWebShop", "\tScenarios on the Tricentis web shop site", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -73,33 +73,16 @@ namespace SeFramework.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
+        [NUnit.Framework.TestCaseAttribute(TestName="Login to the webshop")]
+        [NUnit.Framework.DescriptionAttribute("Login to the webshop")]
+        [NUnit.Framework.CategoryAttribute("frontend")]
+        public virtual void LoginToTheWebshop()
         {
-#line 3
-#line hidden
-#line 4
- testRunner.Given("Webpage http://demowebshop.tricentis.com/ is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
+            string[] tagsOfScenario = new string[] {
+                    "frontend"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login to the webshop", null, new string[] {
+                        "frontend"});
 #line 5
- testRunner.And("Switch to Log in page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-        }
-        
-        [NUnit.Framework.DescriptionAttribute("Exesise Email field on Login page")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        [NUnit.Framework.TestCaseAttribute("just text", "abc", null, TestName="Exesise Email field on Login page(just text,abc)")]
-        [NUnit.Framework.TestCaseAttribute("just numbers", "123", null, TestName="Exesise Email field on Login page(just numbers,123)")]
-        public virtual void ExesiseEmailFieldOnLoginPage(string variant, string email, string[] exampleTags)
-        {
-            string[] @__tags = new string[] {
-                    "mytag"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Exesise Email field on Login page", null, @__tags);
-#line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -119,17 +102,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 3
-this.FeatureBackground();
+#line 6
+ testRunner.Given("I navigate to to the webshop", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 7
+ testRunner.And("I click the log in link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 8
+ testRunner.When("I login as the default user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.When(string.Format("I enter {0} in Email field", email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 10
- testRunner.And("Change the focus", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 11
- testRunner.Then("I can see the error message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should be logged in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

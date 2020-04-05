@@ -30,7 +30,7 @@ namespace SeFramework.StepDefinition
         [Given(@"Switch to (.*) page")]
         public void GivenSwitchToPage(string pageName)
         {
-            _currentScreen = TopLinks._(executionContext.Driver);
+            _currentScreen = TopLinks.GetPage(executionContext.Driver);
             TopLinks.Controls control = TopLinks.Controls.LogIn;
 
             switch (pageName)
@@ -58,7 +58,7 @@ namespace SeFramework.StepDefinition
         [When(@"I enter (.*) in Email field")]
         public void WhenIEnterInEmailField(string emailValue)
         {
-            _currentScreen = LoginPage._(executionContext.Driver);
+            _currentScreen = LoginPage.GetPage(executionContext.Driver);
             var ctrl = _currentScreen.withControlE(LoginPage.ReturningCustomer.Email);
             ctrl.click();
             ctrl.enterText(emailValue);

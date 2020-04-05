@@ -2,6 +2,8 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Reflection;
+using System.Linq;
+using SeFramework.ExtensionResources;
 
 namespace SeFramework.Core
 {
@@ -25,28 +27,32 @@ namespace SeFramework.Core
         public IWebDriver Driver { get; set; } = null;
 
         // TODO: need to add assertions ???
-        public BaseObject withControlE<TT>(TT en, double waitTimeout = 10.0)
+        public BaseObject withControlE<TT>(TT givenControl, double waitTimeout = 10.0)
         {
             // Make sure wa are on the proper screen
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTimeout));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TitleContains(Title));
 
             _currentElement = null;
-            Type controlsInstance = en.GetType();
-            MemberInfo[] members = controlsInstance.GetMember(en.ToString());
-            if (members.Length == 1)
-            {
-                foreach (object attribute in members[0].GetCustomAttributes(true))
-                {
-                    if (attribute is Control)
-                    {
-                        Control control = attribute as Control;
-                        //_currentElement = driver.FindElement(control.ControlId);
-                        _currentElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(control.ControlId));
-                        break;
-                    }
-                }
-            }
+            Type controlsInstance = givenControl.GetType();
+            MemberInfo[] members = controlsInstance.GetMember(givenControl.ToString());
+            //if (members.Length == 1)
+            //{
+            //    foreach (object attribute in members[0].GetCustomAttributes(true))
+            //    {
+            //        if (attribute is Control)
+            //        {
+            //            Control control = attribute as Control;
+            //            //_currentElement = driver.FindElement(control.ControlId);
+            //            _currentElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(control.ControlId));
+            //            break;
+            //        }
+            //    }
+            //}
+
+            var member = members.Single();
+            var control = (Control)member.GetCustomAttributes(true).Single(attribute => attribute is Control);
+            _currentElement = Driver.WaitThenFindElement(control.ControlId, TimeSpan.FromSeconds(10));
             return this;
         }
 
