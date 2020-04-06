@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports.Reporter.Configuration;
 using BoDi;
 using OpenQA.Selenium.Firefox;
 using SeFramework.Context.General;
@@ -35,6 +36,8 @@ namespace SeFramework.Hooks.GeneralHook
             string path = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "") + "Report\\index.html";
             ReportPath = path;
             ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path);
+            htmlReporter.Config.Theme = Theme.Dark;
+            htmlReporter.Config.ReportName = "TTC BDD";
 
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
