@@ -8,7 +8,7 @@ namespace SeFramework.PageObject
         private static LoginPage _instance = null;
         public LoginPage(IWebDriver driver) : base(driver) { }
         protected override string Title => "Login";
-        public static LoginPage _(IWebDriver driver)
+        public static LoginPage GetPage(IWebDriver driver)
         {
             return _instance != null && driver.Equals(_instance.Driver) ? _instance : (_instance = new LoginPage(driver));
         }
