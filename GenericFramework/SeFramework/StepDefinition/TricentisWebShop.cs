@@ -32,9 +32,7 @@ namespace SeFramework.StepDefinition
         [Given(@"I click the log in link")]
         public void GivenIClickTheLogInLink()
         {
-            var links = page as TopLinks;
-            page.WithControl(TopLinks.Controls.LogIn);
-            page.Click();
+            page.WithControl(TopLinks.Controls.LogIn).Click();
         }
         #endregion
 
