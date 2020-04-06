@@ -51,7 +51,7 @@ namespace SeFramework.StepDefinition
                     Assert.Fail($"Unknown page name: {pageName}");
                     break;
             }
-            _currentScreen.withControlE(control).click();
+            _currentScreen.WithControl(control).Click();
         }
 
 
@@ -59,28 +59,28 @@ namespace SeFramework.StepDefinition
         public void WhenIEnterInEmailField(string emailValue)
         {
             _currentScreen = LoginPage.GetPage(executionContext.Driver);
-            var ctrl = _currentScreen.withControlE(LoginPage.ReturningCustomer.Email);
-            ctrl.click();
-            ctrl.enterText(emailValue);
+            var ctrl = _currentScreen.WithControl(LoginPage.ReturningCustomer.Email);
+            ctrl.Click();
+            ctrl.EnterText(emailValue);
         }
 
         [When(@"Change the focus")]
         public void WhenChangeTheFocus()
         {
-            _currentScreen.withControlE(LoginPage.ReturningCustomer.Password).click();
+            _currentScreen.WithControl(LoginPage.ReturningCustomer.Password).Click();
         }
 
         [Then(@"I can see the error message")]
         public void ThenICanSeeTheErrorMessage()
         {
-            var errMessage = _currentScreen.withControlE(LoginPage.ReturningCustomer.WrongEmailMessage);
-            errMessage.getText().Should().NotBeNullOrEmpty("There should be an error message");
+            var errMessage = _currentScreen.WithControl(LoginPage.ReturningCustomer.WrongEmailMessage);
+            errMessage.GetText().Should().NotBeNullOrEmpty("There should be an error message");
         }
     }
 
     public class ScreenUtils
     {
-        public static BaseObject GetScreen(Type screenType)
+        public static BaseObject GetScreen(System.Type screenType)
         {
             //BaseObject screen = screenType.InvokeMember("_", System.Reflection.BindingFlags.Static, EqualityComparer.)
             return null;

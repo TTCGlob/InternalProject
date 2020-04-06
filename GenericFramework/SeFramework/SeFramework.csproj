@@ -165,6 +165,7 @@
     <Compile Include="Constant\Framework\BrowserType.cs" />
     <Compile Include="Constant\Framework\General.cs" />
     <Compile Include="Config\ConfigReader.cs" />
+    <Compile Include="Core\ByType.cs" />
     <Compile Include="Exceptions\NoSuchBrowserDriverException.cs" />
     <Compile Include="ExtensionResources\SeleniumExtensions.cs" />
     <Compile Include="Hooks\GeneralHook\InitialisationActions.cs" />
