@@ -177,7 +177,6 @@
     <Compile Include="Core\Control.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\TopLinks.cs" />
-    <Compile Include="StepDefinition\StepDefinition1.cs" />
     <Compile Include="StepDefinition\TricentisWebShop.cs" />
   </ItemGroup>
   <ItemGroup>
