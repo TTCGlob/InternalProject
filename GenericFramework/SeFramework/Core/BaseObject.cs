@@ -27,7 +27,7 @@ namespace SeFramework.Core
         public IWebDriver Driver { get; set; } = null;
 
         // TODO: need to add assertions ???
-        public BaseObject withControlE<TT>(TT givenControl, double waitTimeout = 10.0)
+        public BaseObject WithControl<TT>(TT givenControl, double waitTimeout = 10.0)
         {
             // Make sure wa are on the proper screen
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTimeout));
@@ -36,20 +36,6 @@ namespace SeFramework.Core
             _currentElement = null;
             Type controlsInstance = givenControl.GetType();
             MemberInfo[] members = controlsInstance.GetMember(givenControl.ToString());
-            //if (members.Length == 1)
-            //{
-            //    foreach (object attribute in members[0].GetCustomAttributes(true))
-            //    {
-            //        if (attribute is Control)
-            //        {
-            //            Control control = attribute as Control;
-            //            //_currentElement = driver.FindElement(control.ControlId);
-            //            _currentElement = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(control.ControlId));
-            //            break;
-            //        }
-            //    }
-            //}
-
             var member = members.Single();
             var control = (Control)member.GetCustomAttributes(true).Single(attribute => attribute is Control);
             _currentElement = Driver.WaitThenFindElement(control.ControlId, TimeSpan.FromSeconds(10));
@@ -63,39 +49,39 @@ namespace SeFramework.Core
             return this;
         }
 
-        public BaseObject enterText(string text)
+        public BaseObject EnterText(string text)
         {
             _currentElement.SendKeys(text);
             return this;
         }
-        public string getText()
+        public string GetText()
         {
             return _currentElement.Text;
         }
 
-        public IWebElement getControl()
+        public IWebElement GetControl()
         {
             return _currentElement;
         }
 
-        public BaseObject click()
+        public BaseObject Click()
         {
             _currentElement.Click();
             return this;
         }
 
-        public BaseObject select(string item)
+        public BaseObject Select(string item)
         {
             SelectElement dropdown = new SelectElement(_currentElement);
             dropdown.SelectByText(item);
             return this;
         }
 
-        public virtual BaseObject selectMenu<TT>(params TT[] menuItems)
+        public virtual BaseObject SelectMenu<TT>(params TT[] menuItems)
         {
             foreach (TT menuItem in menuItems)
             {
-                withControlE(menuItem).click();
+                WithControl(menuItem).Click();
             }
             return this;
         }

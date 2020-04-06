@@ -1,10 +1,12 @@
-﻿using SeFramework.Context.General;
+﻿using FluentAssertions;
+using SeFramework.Context.General;
 using SeFramework.Core;
 using SeFramework.PageObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
 namespace SeFramework.StepDefinition
@@ -31,8 +33,8 @@ namespace SeFramework.StepDefinition
         public void GivenIClickTheLogInLink()
         {
             var links = page as TopLinks;
-            page.withControlE(TopLinks.Controls.LogIn);
-            page.click();
+            page.WithControl(TopLinks.Controls.LogIn);
+            page.Click();
         }
         #endregion
 
@@ -44,9 +46,9 @@ namespace SeFramework.StepDefinition
             var username = executionContext.ConfigReader.Username;
             var password = executionContext.ConfigReader.Password;
             var loginPage = LoginPage.GetPage(executionContext.Driver);
-            loginPage.withControlE(LoginPage.ReturningCustomer.Email).enterText(username);
-            loginPage.withControlE(LoginPage.ReturningCustomer.Password).enterText(password);
-            loginPage.withControlE(LoginPage.ReturningCustomer.Password).click();
+            loginPage.WithControl(LoginPage.ReturningCustomer.Email).EnterText(username);
+            loginPage.WithControl(LoginPage.ReturningCustomer.Password).EnterText(password);
+            loginPage.WithControl(LoginPage.ReturningCustomer.LogIn).Click();
         }
 
 
@@ -58,9 +60,9 @@ namespace SeFramework.StepDefinition
         public void ThenIShouldBeLoggedIn()
         {
             var page = TopLinks.GetPage(executionContext.Driver);
-
+            var username = executionContext.ConfigReader.Username;
+            page.WithControl(TopLinks.Controls.Account).GetText().Should().Be(username);
         }
-
         #endregion
     }
 }
