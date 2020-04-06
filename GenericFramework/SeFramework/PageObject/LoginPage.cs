@@ -16,23 +16,23 @@ namespace SeFramework.PageObject
         #region Controls
         public enum NewCustomer
         {
-            [Control("XPath", "//input[@value='Register']")]
+            [Control(ByType.XPath, "//input[@value='Register']")]
             Register
         };
 
         public enum ReturningCustomer
         {
-            [Control("ClassName", "validation-summary-errors")]
+            [Control(ByType.ClassName, "validation-summary-errors")]
             IncorrectLoginMessage,
-            [Control("ClassName", "email")]
+            [Control(ByType.Id, "Email")]
             Email,
-            [Control("XPath", "//span[@for='Email']")]
+            [Control(ByType.XPath, "//span[@for='Email']")]
             WrongEmailMessage,
-            [Control("ClassName", "password")]
+            [Control(ByType.Id, "Password")]
             Password,
-            [Control("XPath", "//input[@id='RememberMe']")]
+            [Control(ByType.Id, "RememberMe")]
             RememberMe,
-            [Control("XPath", "//input[@value='Log in']")]
+            [Control(ByType.XPath, "//input[@value='Log in']")]
             LogIn
         };
         #endregion

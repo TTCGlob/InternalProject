@@ -57,7 +57,8 @@ namespace SeFramework.StepDefinition
         [Then(@"I should be logged in")]
         public void ThenIShouldBeLoggedIn()
         {
-            
+            var page = TopLinks.GetPage(executionContext.Driver);
+
         }
 
         #endregion

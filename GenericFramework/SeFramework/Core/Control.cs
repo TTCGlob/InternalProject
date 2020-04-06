@@ -8,11 +8,13 @@ namespace SeFramework.Core
     [AttributeUsage(AttributeTargets.Field)]
     public class Control : Attribute
     {
-        public Control(string byType, string byParam)
+        private Control(string byType, string byParam)
         {
             MethodInfo method = typeof(By).GetMethod(byType);
             ControlId = (By)method.Invoke(null, new object[] { byParam });
         }
+
+        public Control(ByType byType, string byParam) : this(byType.ToString(), byParam) { }
 
         public By ControlId { get; }
     }

@@ -15,13 +15,16 @@ namespace SeFramework.PageObject
 
         public enum Controls
         {
-            [Control("LinkText", "Register")]
+            [Control(ByType.LinkText, "Register")]
             Register,
-            [Control("LinkText", "Log in")]
+            [Control(ByType.LinkText, "Log in")]
             LogIn,
+            [Control(ByType.PartialLinkText, "Shopping cart")]
             ShoppingCart,
-            [Control("PartialLinkText", "Wishlist")]
-            Wishlist
+            [Control(ByType.PartialLinkText, "Wishlist")]
+            Wishlist,
+            [Control(ByType.ClassName, "account")]
+            Account
         };
     }
 }

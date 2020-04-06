@@ -80,7 +80,7 @@ namespace SeFramework.StepDefinition
 
     public class ScreenUtils
     {
-        public static BaseObject GetScreen(Type screenType)
+        public static BaseObject GetScreen(System.Type screenType)
         {
             //BaseObject screen = screenType.InvokeMember("_", System.Reflection.BindingFlags.Static, EqualityComparer.)
             return null;
