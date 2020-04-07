@@ -2,16 +2,11 @@
 using SeFramework.Context.General;
 using SeFramework.Core;
 using SeFramework.PageObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
 namespace SeFramework.StepDefinition
 {
-	[Binding]
+    [Binding]
 	public sealed class TricentisWebShop
 	{
         private readonly ExecutionContext executionContext;

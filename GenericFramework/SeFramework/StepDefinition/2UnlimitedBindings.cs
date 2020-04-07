@@ -3,13 +3,12 @@ using NUnit.Framework;
 using SeFramework.Context.General;
 using SeFramework.Core;
 using SeFramework.PageObject;
-using System;
 using TechTalk.SpecFlow;
 
 namespace SeFramework.StepDefinition
 {
 
-    [Binding]
+	[Binding]
     class _2UnlimitedBindings
     {
         private readonly ExecutionContext executionContext;
