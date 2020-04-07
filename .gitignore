@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 
 # VS directory
+/GenericFramework/SeFramework/App.config
