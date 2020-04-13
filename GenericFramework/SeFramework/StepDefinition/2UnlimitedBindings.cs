@@ -29,7 +29,7 @@ namespace SeFramework.StepDefinition
         [Given(@"Switch to (.*) page")]
         public void GivenSwitchToPage(string pageName)
         {
-            _currentScreen = TopLinks.GetPage(executionContext.Driver);
+            _currentScreen = TopLinks.Get(executionContext.Driver);
             TopLinks.Controls control = TopLinks.Controls.LogIn;
 
             switch (pageName)

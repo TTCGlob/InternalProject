@@ -59,6 +59,7 @@ namespace SeFramework.Hooks.GeneralHook
         {
             scenario = featureName.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title, scenarioContext.ScenarioInfo.Description);
             executionContext.Driver = InitialisationActions.InitialiseDriver();
+            executionContext.ScenarioContext = scenarioContext;
         }
 
         [AfterScenario]

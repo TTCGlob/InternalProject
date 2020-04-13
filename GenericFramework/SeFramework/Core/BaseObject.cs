@@ -4,12 +4,13 @@ using OpenQA.Selenium.Support.UI;
 using System.Reflection;
 using System.Linq;
 using SeFramework.ExtensionResources;
+using System.Collections.Generic;
 
 namespace SeFramework.Core
 {
     public abstract class BaseObject
     {
-        private IWebElement _currentElement = null;
+        protected IWebElement _currentElement = null;
 
         public BaseObject(IWebDriver driver, By iFrameId = null)
         {
@@ -25,6 +26,7 @@ namespace SeFramework.Core
 
         protected abstract string Title { get; }
         public IWebDriver Driver { get; set; } = null;
+        public IWebElement Parent { get; protected set; } = null;
 
         // TODO: need to add assertions ???
         public BaseObject WithControl<TT>(TT givenControl, double waitTimeout = 10.0)
@@ -32,13 +34,26 @@ namespace SeFramework.Core
             // Make sure wa are on the proper screen
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTimeout));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TitleContains(Title));
-
             _currentElement = null;
+
             Type controlsInstance = givenControl.GetType();
-            MemberInfo[] members = controlsInstance.GetMember(givenControl.ToString());
-            var member = members.Single();
-            var control = (Control)member.GetCustomAttributes(true).Single(attribute => attribute is Control);
-            _currentElement = Driver.WaitThenFindElement(control.ControlId, TimeSpan.FromSeconds(10));
+            if (!Attribute.IsDefined(controlsInstance, typeof(ChildControl))) Parent = null;
+
+            var parentIds = controlsInstance.GetCustomAttributes<Parent>(true)
+                .Select(p => p.ControlId);
+
+            MemberInfo member = controlsInstance.GetMember(givenControl.ToString()).Single();
+            
+            parentIds = parentIds.Concat(member.GetCustomAttributes<Parent>().Select(p => p.ControlId));
+            var control = member.GetCustomAttribute<Control>(true);
+            
+            foreach (var parentBy in parentIds)
+            {
+                Parent = Driver.WaitThenFindElement(Parent, parentBy, TimeSpan.FromSeconds(5));
+            }
+
+            _currentElement = Driver.WaitThenFindElement(Parent, control.ControlId, TimeSpan.FromSeconds(5));
+            Parent = null;
             return this;
         }
 
@@ -57,6 +72,21 @@ namespace SeFramework.Core
         public string GetText()
         {
             return _currentElement.Text;
+        }
+
+        public bool IsDisplayed<TT>(TT item, double timeout = 3.0)
+        {
+            try
+            {
+                WithControl(item, timeout);
+                return _currentElement.Displayed;
+            }
+            catch (Exception ex)
+            {
+                if (ex is NoSuchElementException || ex is WebDriverTimeoutException)
+                    return false;
+                throw ex;
+            }
         }
 
         public IWebElement GetControl()
