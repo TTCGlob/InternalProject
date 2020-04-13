@@ -166,9 +166,15 @@
     <Compile Include="Constant\Framework\General.cs" />
     <Compile Include="Config\ConfigReader.cs" />
     <Compile Include="Core\ByType.cs" />
+    <Compile Include="Core\ChildControl.cs" />
+    <Compile Include="Core\Parent.cs" />
     <Compile Include="Exceptions\NoSuchBrowserDriverException.cs" />
     <Compile Include="ExtensionResources\SeleniumExtensions.cs" />
     <Compile Include="Hooks\GeneralHook\InitialisationActions.cs" />
+    <Compile Include="PageObject\NotificationBar.cs" />
+    <Compile Include="PageObject\ProductCategoryLinks.cs" />
+    <Compile Include="PageObject\ProductPage.cs" />
+    <Compile Include="PageObject\ShoppingCart.cs" />
     <Compile Include="StepDefinition\2UnlimitedBindings.cs" />
     <Compile Include="Hooks\GeneralHook\SpecFlowHooks.cs" />
     <Compile Include="Context\General\ExecutionContext.cs" />
@@ -177,7 +183,7 @@
     <Compile Include="Core\Control.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\TopLinks.cs" />
-    <Compile Include="StepDefinition\TricentisWebShop.cs" />
+    <Compile Include="StepDefinition\TricentisWebShopSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
