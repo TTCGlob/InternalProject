@@ -177,11 +177,13 @@
     <Compile Include="Core\Control.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\TopLinks.cs" />
+    <Compile Include="StepDefinition\Stef\TricentisWebShop.cs" />
     <Compile Include="StepDefinition\TricentisWebShop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\2Unlimited.feature" />
+    <None Include="Features\Stef\TricentisWebShop.feature" />
     <None Include="Features\TricentisWebShop.feature" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -190,7 +192,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PageObject\Stef\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SpecFlow.3.1.89\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.3.1.89\build\SpecFlow.targets')" />
