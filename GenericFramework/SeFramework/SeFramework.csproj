@@ -168,6 +168,7 @@
     <Compile Include="Core\ByType.cs" />
     <Compile Include="Core\ChildControl.cs" />
     <Compile Include="Core\Parent.cs" />
+    <Compile Include="Exceptions\NoParentInitialisedException.cs" />
     <Compile Include="Exceptions\NoSuchBrowserDriverException.cs" />
     <Compile Include="ExtensionResources\SeleniumExtensions.cs" />
     <Compile Include="Hooks\GeneralHook\InitialisationActions.cs" />

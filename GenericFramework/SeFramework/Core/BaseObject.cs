@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Linq;
 using SeFramework.ExtensionResources;
 using System.Collections.Generic;
+using SeFramework.Exceptions;
 
 namespace SeFramework.Core
 {
@@ -37,21 +38,34 @@ namespace SeFramework.Core
             _currentElement = null;
 
             Type controlsInstance = givenControl.GetType();
-            if (!Attribute.IsDefined(controlsInstance, typeof(ChildControl))) Parent = null;
+            
+            //Ensures that the ChildControl attribute has been used properly
+            if (!Attribute.IsDefined(controlsInstance, typeof(ChildControl)))
+            {
+                //Clears the parent field if not required
+                Parent = null;
+            }
+            else if (Parent is null)
+            {
+                //If the ChildControl attribute has been used but no parent has been given an exception is thrown
+                throw new NoParentInitialisedException($"Error, control {controlsInstance} has been marked with the ChildControl attribute but no parent has been initialised.");
+            }
 
+            //Gets the By locators for all the Parent attributes of the control type (e.g. the enum definition)
             var parentIds = controlsInstance.GetCustomAttributes<Parent>(true)
                 .Select(p => p.ControlId);
 
+            //Gets the By locators for all the parent attributes for the control member (e.g. the enum value)
             MemberInfo member = controlsInstance.GetMember(givenControl.ToString()).Single();
-            
             parentIds = parentIds.Concat(member.GetCustomAttributes<Parent>().Select(p => p.ControlId));
+            
+            //Gets the By locator for the control itself from the Control attribute
             var control = member.GetCustomAttribute<Control>(true);
             
-            foreach (var parentBy in parentIds)
-            {
-                Parent = Driver.WaitThenFindElement(Parent, parentBy, TimeSpan.FromSeconds(5));
-            }
+            //Loops through the parent locators to get the direct parent of the control
+            Parent = parentIds.Aggregate(Parent, (acc, parentBy) => Driver.WaitThenFindElement(Parent, parentBy, TimeSpan.FromSeconds(5)));
 
+            //Locates the element
             _currentElement = Driver.WaitThenFindElement(Parent, control.ControlId, TimeSpan.FromSeconds(5));
             Parent = null;
             return this;
