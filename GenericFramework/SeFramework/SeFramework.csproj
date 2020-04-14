@@ -172,10 +172,10 @@
     <Compile Include="Exceptions\NoSuchBrowserDriverException.cs" />
     <Compile Include="ExtensionResources\SeleniumExtensions.cs" />
     <Compile Include="Hooks\GeneralHook\InitialisationActions.cs" />
-    <Compile Include="PageObject\NotificationBar.cs" />
-    <Compile Include="PageObject\ProductCategoryLinks.cs" />
-    <Compile Include="PageObject\ProductPage.cs" />
-    <Compile Include="PageObject\ShoppingCart.cs" />
+    <Compile Include="PageObject\Geordie\NotificationBar.cs" />
+    <Compile Include="PageObject\Geordie\ProductCategoryLinks.cs" />
+    <Compile Include="PageObject\Geordie\ProductPage.cs" />
+    <Compile Include="PageObject\Geordie\ShoppingCart.cs" />
     <Compile Include="StepDefinition\2UnlimitedBindings.cs" />
     <Compile Include="Hooks\GeneralHook\SpecFlowHooks.cs" />
     <Compile Include="Context\General\ExecutionContext.cs" />
@@ -184,12 +184,12 @@
     <Compile Include="Core\Control.cs" />
     <Compile Include="PageObject\LoginPage.cs" />
     <Compile Include="PageObject\TopLinks.cs" />
-    <Compile Include="StepDefinition\TricentisWebShopSteps.cs" />
+    <Compile Include="StepDefinition\Geordie\TricentisWebShopSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\2Unlimited.feature" />
-    <None Include="Features\TricentisWebShop.feature" />
+    <None Include="Features\Geordie\TricentisWebShop.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

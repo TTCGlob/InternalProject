@@ -4,7 +4,6 @@ using OpenQA.Selenium.Support.UI;
 using System.Reflection;
 using System.Linq;
 using SeFramework.ExtensionResources;
-using System.Collections.Generic;
 using SeFramework.Exceptions;
 
 namespace SeFramework.Core
@@ -70,6 +69,8 @@ namespace SeFramework.Core
             Parent = null;
             return this;
         }
+
+        private WaitForTitle
 
         #region Actions
         public BaseObject testText(string text)

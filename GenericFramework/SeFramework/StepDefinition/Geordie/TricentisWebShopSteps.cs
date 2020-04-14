@@ -2,14 +2,15 @@
 using SeFramework.Context.General;
 using SeFramework.Core;
 using SeFramework.PageObject;
+using SeFramework.PageObject.Geordie;
 using System.Text.RegularExpressions;
 using TechTalk.SpecFlow;
 
-namespace SeFramework.StepDefinition
+namespace SeFramework.StepDefinition.Geordie
 {
     [Binding]
-	public sealed class TricentisWebShopSteps
-	{
+    public sealed class TricentisWebShopSteps
+    {
         private readonly ExecutionContext executionContext;
         private BaseObject page;
         public TricentisWebShopSteps(ExecutionContext executionContext)
@@ -61,7 +62,7 @@ namespace SeFramework.StepDefinition
             loginPage.WithControl(LoginPage.ReturningCustomer.Password).EnterText(password);
             loginPage.WithControl(LoginPage.ReturningCustomer.LogIn).Click();
         }
-        
+
         [When(@"I add ""(.*)"" to my cart")]
         public void WhenIAddToMyCart(string product)
         {

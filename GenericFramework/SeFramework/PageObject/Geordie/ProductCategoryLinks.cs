@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SeFramework.PageObject
+namespace SeFramework.PageObject.Geordie
 {
 	public class ProductCategoryLinks : BaseObject
 	{
@@ -36,7 +36,7 @@ namespace SeFramework.PageObject
 
 		[Parent(ByType.ClassName, "top-menu")]
 		public enum Categories
-		{	
+		{
 			[Control(ByType.LinkText, "BOOKS")]
 			Books,
 			[Control(ByType.LinkText, "COMPUTERS")]
