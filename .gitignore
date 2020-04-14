@@ -338,5 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 
-# VS directory
-/GenericFramework/SeFramework/App.config
+# Reports directory
+Report/
+GenericFramework/SeFramework/Report/dashboard.html
+GenericFramework/SeFramework/Report/index.html

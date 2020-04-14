@@ -3,10 +3,9 @@ using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
 using BoDi;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.Extensions;
 using SeFramework.Context.General;
 using System;
-using System.IO;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Bindings;
 
@@ -16,6 +15,7 @@ namespace SeFramework.Hooks.GeneralHook
     class SpecFlowHooks
     {
         private readonly ExecutionContext executionContext;
+        private static string ReportDirectory;
         public static string ReportPath;
         private static ExtentReports extent;
         private static ExtentTest featureName;
@@ -33,9 +33,9 @@ namespace SeFramework.Hooks.GeneralHook
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "") + "Report\\index.html";
-            ReportPath = path;
-            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(path);
+            ReportDirectory = AppDomain.CurrentDomain.BaseDirectory.Replace("\\bin\\Debug", "") + "Report\\";
+            ReportPath = ReportDirectory + "index.html";
+            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(ReportPath);
             htmlReporter.Config.Theme = Theme.Dark;
             htmlReporter.Config.ReportName = "TTC BDD";
 
@@ -59,6 +59,7 @@ namespace SeFramework.Hooks.GeneralHook
         {
             scenario = featureName.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title, scenarioContext.ScenarioInfo.Description);
             executionContext.Driver = InitialisationActions.InitialiseDriver();
+            executionContext.ScenarioContext = scenarioContext;
         }
 
         [AfterScenario]
@@ -95,9 +96,13 @@ namespace SeFramework.Hooks.GeneralHook
 
             if (stepStatus != ScenarioExecutionStatus.OK)
             {
-                test.Fail(string.Format("Error from: {0}\nError Details: {1}\nStacktrace: {2}",
-                    scenarioContext.TestError.Source, scenarioContext.TestError,
-                    scenarioContext.TestError.StackTrace));
+                var screenshot = executionContext.Driver.TakeScreenshot().AsBase64EncodedString;
+                test.Fail(string.Format("Error from: {0}<br>Error Details: {1}",
+                    scenarioContext.TestError.Source,
+                    scenarioContext.TestError.Message),
+                    MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot).Build());
+                test.CreateNode("Stacktrace:");
+                test.Debug(scenarioContext.TestError.StackTrace);
             }
         }
 
