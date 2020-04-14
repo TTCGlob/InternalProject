@@ -3,13 +3,12 @@ using NUnit.Framework;
 using SeFramework.Context.General;
 using SeFramework.Core;
 using SeFramework.PageObject;
-using System;
 using TechTalk.SpecFlow;
 
 namespace SeFramework.StepDefinition
 {
 
-    [Binding]
+	[Binding]
     class _2UnlimitedBindings
     {
         private readonly ExecutionContext executionContext;
@@ -30,7 +29,7 @@ namespace SeFramework.StepDefinition
         [Given(@"Switch to (.*) page")]
         public void GivenSwitchToPage(string pageName)
         {
-            _currentScreen = TopLinks.GetPage(executionContext.Driver);
+            _currentScreen = TopLinks.Get(executionContext.Driver);
             TopLinks.Controls control = TopLinks.Controls.LogIn;
 
             switch (pageName)

@@ -8,7 +8,7 @@ namespace SeFramework.PageObject
         private static TopLinks _instance = null;
         private TopLinks(IWebDriver driver) : base(driver) { }
         protected override string Title => "Demo Web Shop";
-        public static TopLinks GetPage(IWebDriver driver) =>
+        public static TopLinks Get(IWebDriver driver) =>
             _instance != null && driver.Equals(_instance.Driver)
             ? _instance
             : (_instance = new TopLinks(driver));
